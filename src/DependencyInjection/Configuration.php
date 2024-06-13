@@ -26,8 +26,13 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('mediapart_la_presse_libre');
+        $treeBuilder = new TreeBuilder('mediapart_la_presse_libre');
+
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            $rootNode = $treeBuilder->root('mediapart_la_presse_libre');
+        }
 
         $rootNode
             ->children()
